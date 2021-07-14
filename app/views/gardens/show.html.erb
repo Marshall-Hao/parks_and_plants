@@ -1,14 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @garden.name %>
-</p>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= @garden.banner_url %>');">
+  <div class="container">
+    <h1><%= @garden.name %></h1>
+  </div>
+</div>
 
-<p>
-  <strong>Banner url:</strong>
-  <%= @garden.banner_url %>
-</p>
+
+<div class="cards">
+  <% @garden.flowers.each do |flower| %>
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= flower.image_url %>')">
+    <%= flower.name %>
+    <%= link_to 'delete', flower_path(flower), method: :delete %>
+  </div>
+
+  <% end  %>
+</div>
+
+
 
 <%= link_to 'Edit', edit_garden_path(@garden) %> |
 <%= link_to 'Back', gardens_path %>
+<%= link_to 'Add flower', new_garden_flower_path(@garden) %>
