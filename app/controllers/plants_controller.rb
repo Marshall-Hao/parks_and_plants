@@ -1,9 +1,8 @@
 class PlantsController < ApplicationController
 
     def create 
-        @plant = Plant.new(plant_params)
         @garden = Garden.find(params[:garden_id])
-        raise
+        @plant = Plant.new(plant_params)
         @plant.garden = @garden
         if @plant.save
             redirect_to garden_path(@plant.garden)
@@ -23,4 +22,5 @@ class PlantsController < ApplicationController
     def plant_params
         params.require(:plant).permit(:name, :image_url)
     end
+
 end
